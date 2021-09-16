@@ -1,31 +1,47 @@
+/*--------------------------------------------HEADER/FOOTER------------------------------------------------------*/
 
-
-
-
-.background {
+.background-header { 
   height: 100px;
   background-color: #f3e9f1;  
 }
 
-.black {
-    color: #8f5aff;
+.menu-color {
+  color: #8f5aff;
 }
+
+.menu-color:hover {
+  color: #7433ff
+}
+
+.footer {
+  height: 90px;
+  background-color: #8f5aff ;
+}
+
+/*---------------------------------------------INDEX-HTML--------------------------------------------------------*/
 
 .bg-violet {
   background-color: #8f5aff;
   border-radius: 10px;
-} 
+}
 
 .font-bold {
   font-weight: bold;
 }
 
+/*----JS----*/
+
 .card {
   border-radius: 10px;
 }
 
-.img img {
-  border-radius: 10px;
+.card a {
+  text-decoration: none;
+  color: black;
+}
+
+.card-text {
+  margin: 1rem 0 0 1rem;
 }
 
 .picture img {
@@ -36,57 +52,52 @@
   border-top-right-radius: 10px; 
 }
 
-.card-text {
-  margin: 1rem 0 0 1rem;
+/*--------------------------------------------PRODUCT-HTML-------------------------------------------------------*/
+
+/*----JS----*/
+
+.product-img {
+  border-radius: 10px;
 }
 
-.card a {
-  text-decoration: none;
-  color: black;
+/*----------------------------------------------CART-HTML--------------------------------------------------------*/ 
+
+.panier-vide-block {
+  background-color: #e9e9ea;
+  border-radius: 10px;
+  padding: 5rem 0;
 }
 
-.footer {
-  height: 90px;
-  background-color: #8f5aff ;
-}
-
-.s_product_text .product_count {
-  border: 1px solid #ddd;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  padding: 12px 15px;
-}
-
-.s_product_text .card_area .product_count input {
-  border: 0px solid transparent;
-  text-align: center;
-}
-
-.s_product_text .product_count .input-number {
-  display: inline-block;
-  width: 60px;
-}
-
-#number {
-  width: 3rem;
-}
-
-.button {
-  color: white;
-  background-color: #8f5aff;
-}
-
-.font-size {
+.panier-vide-text {
   font-size: 20px;
-  font-weight: 500;
+  margin-left: 2rem;
 }
 
-#quantity
-{
-  width: 20px;
+.panier-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem 0;
 }
 
+.formulaire-title {
+  font-size: 28px;
+}
+
+.card-img {
+  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.btn-color {
+  background-color: #8f5aff;
+  color: white;
+}
+
+.btn-color:hover {
+  background-color: #7433ff;
+  color: white;
+}
 
 
 

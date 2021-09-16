@@ -25,8 +25,8 @@ function cameras(product) { //Création de la carte produit
 
     let cameraCard = `<div class="row mb-4">
 
-                    <div class="card col-lg-8 col-xs-12 col-sm-12 col-md-12 px-0 img">
-                    <img src="${product.imageUrl}">
+                    <div class="card col-lg-8 col-xs-12 col-sm-12 col-md-12 px-0">
+                    <img class="product-img" src="${product.imageUrl}">
                     </div>
 
                     <div class="col-lg-4 px-4">
@@ -37,7 +37,7 @@ function cameras(product) { //Création de la carte produit
 
                             <form>
                                 <label for="options" class="row d-flex">
-                                    <span class="col pt-2 ">Lentille :</span>
+                                    <span class="col pt-2">Lentille :</span>
                                     <select name="lenses" id="optionslenses" class="form-select col"></select>
                                 </label>
 
@@ -47,8 +47,9 @@ function cameras(product) { //Création de la carte produit
                                 </label>
                             </form>                          
                         </div>
-
-                        <button type="submit" id="btn_panier" class="btn-add btn-store mt-5 ">Ajouter au panier</button> 
+                        <div class="d-grid justify-content-md-end">
+                        <button type="submit" id="btn_panier" class="btn btn-color mt-4">Ajouter au panier</button> 
+                        </div>
                     </div>
 
                     <h2 class="mt-3">Caractéristiques</h2>
@@ -92,7 +93,7 @@ function stockPanier(productcamera) {
             }
         }
         
-        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, productcamera.price, productcamera._id, 1);
+        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, productcamera.price, productcamera._id, 1/*Lire le champs quantité*/);
 
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
