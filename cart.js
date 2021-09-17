@@ -154,7 +154,7 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         
         <label for="email">
         Adresse Mail : 
-        <input type="email" id="email" class="form-control" value=" "placeholder="exemple@email.com" required>
+        <input type="email" id="email" class="form-control" value="" pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" placeholder="exemple@email.com" required>
         </label>
         
         <label for="adress">
@@ -207,12 +207,110 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         
         //----------------------------------------------GESTION VALIDATION DU FORMULAIRE--------------------------------------------//
 
+        //A ranger dans une class ?
         
+        const regExLastFirst = (value) => {
+            return /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/.test(value);
+        }
+        
+        function lastControl() {
+            
+            const lastName = formulaireValues.lastname;
+            if(regExLastFirst(lastName)){
+                return true;
+            }else{
+
+                alert("Chiffre et symbole ne sont pas autorisés")
+                return false;
+            }
+        };
+
+        function firstControl() {
+            
+            const firstName = formulaireValues.firstname;
+            if(regExLastFirst(firstName)){
+                return true;
+            }else{
+
+                alert("Chiffre et symbole ne sont pas autorisés")
+                return false;
+            }
+        };
+
+        const regExEmail = (value) => {
+            return /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/.test(value);
+        }
+
+        function emailControl() {
+            
+            const email = formulaireValues.email;
+            if(regExEmail(email)){
+                return true;
+            }else{
+
+                alert("Adresse mail non valide")
+                return false;
+            }
+        };
+        
+        const regExAdress = (value) => {
+            return /^(([a-zA-ZÀ-ÿ0-9_]+[\s\-][a-zA-ZÀ-ÿ0-9_]+)|([a-zA-ZÀ-ÿ0-9_]+)){1,10}$/.test(value);
+        }
+
+        function adressControl() {
+            
+            const adress = formulaireValues.adress;
+            if(regExAdress(adress)){
+                return true;
+            }else{
+
+                alert("Adresse non valide")
+                return false;
+            }
+        };
+
+
+        const regExCp = (value) => {
+            return /^[0-9]{5}$/.test(value);
+        }
+
+        function cpControl() {
+            
+            const cp = formulaireValues.cp;
+            if(regExCp(cp)){
+                return true;
+            }else{
+
+                alert("Code postal non valide")
+                return false;
+            }
+        };
+
+        const regExCity = (value) => {
+            return /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+)){1,10}$/.test(value);
+        }
+
+        function cityControl() {
+            
+            const city = formulaireValues.city;
+            if(regExCity(city)){
+                return true;
+            }else{
+
+                alert("ville non valide")
+                return false;
+            }
+        }
+
         
         //-------------------------------------------FIN - GESTION VALIDATION DU FORMULAIRE-----------------------------------------//
         
-        //Mettre l'objet "formulaireValues" dans le local storage
-        localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues))
+        if(lastControl() && firstControl() && emailControl() && adressControl() && cpControl() && cityControl()){
+            //Mettre l'objet "formulaireValues" dans le local storage
+            localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues)); 
+        }else{
+            
+        };
         
         //Mettre les values du formulaire et les produits sélectionnés dans un objet à envoyer au serveur
         let aEnvoyer = {
@@ -222,8 +320,8 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         
         console.log(aEnvoyer);
         
-        window.location.href = "confirmation.html"
-            
+        //window.location.href = "confirmation.html"
+        
     })
     
     //----------------------------------------------Gestion validation du formulaire--------------------------------------------
