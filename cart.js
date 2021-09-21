@@ -152,10 +152,9 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         <input type="text" id="firstname" class="form-control" value="" placeholder="Jean" required>
         </label>
         
-        <label for="email">
+        <label for="email"></label>
         Adresse Mail : 
-        <input type="email" id="email" class="form-control" value="" pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" placeholder="exemple@email.com" required>
-        </label>
+        <input type="email" id="email" class="form-control" placeholder="exemple@email.com" required>
         
         <label for="adress">
         Adresse : 
@@ -171,7 +170,6 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         Ville : 
         <input type="text" id="city" class="form-control" value="" placeholder="Paris" required>
         </label>
-        </form>
         
         <div class="d-grid gap-4 d-md-flex justify-content-md-end">
         <button type="button" class="btn btn-color mt-4" onclick="window.location.href = 'index.html'">
@@ -181,7 +179,8 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         <button type="submit" class="btn btn-color mt-4" id="submit">
         Valider la commande
         </button>
-        </div>`
+        </div>
+        </form>`
         
         let formulaire = document.getElementById('formulaire');
         formulaire.innerHTML = structureFormulaire;
@@ -193,7 +192,8 @@ for (let j = 0; j < btn_supprimer.length; j++) {
     
     const btnValiderCommande = document.getElementById('submit');
     
-    btnValiderCommande.addEventListener("click", function() {
+    btnValiderCommande.addEventListener("click", function(e) {
+        e.preventDefault();
         
         //Récupération des valeurs du formulaire
         const formulaireValues = {
@@ -206,7 +206,7 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         }
         
         //----------------------------------------------GESTION VALIDATION DU FORMULAIRE--------------------------------------------//
-
+        
         //A ranger dans une class ?
         
         const regExLastFirst = (value) => {
@@ -219,35 +219,36 @@ for (let j = 0; j < btn_supprimer.length; j++) {
             if(regExLastFirst(lastName)){
                 return true;
             }else{
-
-                alert("Chiffre et symbole ne sont pas autorisés")
+                
+                alert("Nom non valide")
+                
                 return false;
             }
         };
-
+        
         function firstControl() {
             
             const firstName = formulaireValues.firstname;
             if(regExLastFirst(firstName)){
                 return true;
             }else{
-
-                alert("Chiffre et symbole ne sont pas autorisés")
+                
+                alert("Prénom non valide")
                 return false;
             }
         };
-
+        
         const regExEmail = (value) => {
             return /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/.test(value);
         }
-
+        
         function emailControl() {
             
             const email = formulaireValues.email;
             if(regExEmail(email)){
                 return true;
             }else{
-
+                
                 alert("Adresse mail non valide")
                 return false;
             }
@@ -256,72 +257,90 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         const regExAdress = (value) => {
             return /^(([a-zA-ZÀ-ÿ0-9_]+[\s\-][a-zA-ZÀ-ÿ0-9_]+)|([a-zA-ZÀ-ÿ0-9_]+)){1,10}$/.test(value);
         }
-
+        
         function adressControl() {
             
             const adress = formulaireValues.adress;
             if(regExAdress(adress)){
                 return true;
             }else{
-
+                
                 alert("Adresse non valide")
                 return false;
             }
         };
-
-
+        
+        
         const regExCp = (value) => {
             return /^[0-9]{5}$/.test(value);
         }
-
+        
         function cpControl() {
             
             const cp = formulaireValues.cp;
             if(regExCp(cp)){
                 return true;
             }else{
-
+                
                 alert("Code postal non valide")
                 return false;
             }
         };
-
+        
         const regExCity = (value) => {
             return /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+)){1,10}$/.test(value);
         }
-
+        
         function cityControl() {
             
             const city = formulaireValues.city;
             if(regExCity(city)){
                 return true;
             }else{
-
+                
                 alert("ville non valide")
                 return false;
             }
         }
-
+        
         
         //-------------------------------------------FIN - GESTION VALIDATION DU FORMULAIRE-----------------------------------------//
         
         if(lastControl() && firstControl() && emailControl() && adressControl() && cpControl() && cityControl()){
             //Mettre l'objet "formulaireValues" dans le local storage
-            localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues)); 
+            localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues));
+
+            let aEnvoyer = {
+                localStorageProducts,
+                formulaireValues
+            };
+
+            let promise = JSON.stringify(aEnvoyer);
+
+            fetch("http://localhost:3000/api/cameras/order", {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: promise,
+              })
+                .then((data) => {
+                  return data.json();
+                })
+                .then((json) => {
+                  localStorage.setItem("order", json.orderId);
+                  //location.href = "confirmation.html";
+                });
+              localStorage.removeItem("camera");
+                      
         }else{
+
+            alert("Veuillez bien remplir le formulaire"); 
             
         };
         
         //Mettre les values du formulaire et les produits sélectionnés dans un objet à envoyer au serveur
-        let aEnvoyer = {
-            localStorageProducts,
-            formulaireValues
-        }
-        
-        console.log(aEnvoyer);
-        
-        //window.location.href = "confirmation.html"
-        
-    })
-    
-    //----------------------------------------------Gestion validation du formulaire--------------------------------------------
+});
+
+//----------------------------------------------Gestion validation du formulaire--------------------------------------------
+

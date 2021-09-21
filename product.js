@@ -43,8 +43,9 @@ function cameras(product) { //Création de la carte produit
     
     <label for="quantity" class="row d-flex mt-4">
     <span id="quantity-label" class="col pt-2">Quantité :</span>
-    <input type="number" id="number" class="form-control col" min="1" value="1">
+    <select name="quantity" id="optionsquantity" class="form-select col"></select>
     </label>
+
     </form>                          
     </div>
     <div class="d-grid justify-content-md-end">
@@ -74,10 +75,17 @@ function cameras(product) { //Création de la carte produit
     
     /*---------------------------SELECTION DE LA QUANTITE-------------------------*/
 
-    //Créer option de sélection : 1 - 2 - 3 - 4 - 5
-    //Mettre une quantité max ?
-    //Associé la quantité au prix = quantité * prix
-    
+    const structureQuantite = `
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    `;
+
+    const positionElementQuantite = document.getElementById("optionsquantity");
+    positionElementQuantite.innerHTML = structureQuantite;
+
 }
 
 /*---------------------------ENVOYER INFOS AU PANIER-------------------------*/
@@ -98,8 +106,8 @@ function stockPanier(productcamera) {
                 this.quantity = quantity
             }
         }
-        
-        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, productcamera.price, productcamera._id, 1/*Lire le champs quantité*/);
+             
+        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, productcamera.price, productcamera._id, 1 /*Lire le champs quantité*/);
         
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
@@ -142,6 +150,8 @@ function stockPanier(productcamera) {
         window.location.href = "cart.html"
     }); 
 }
+
+
 
 
 
