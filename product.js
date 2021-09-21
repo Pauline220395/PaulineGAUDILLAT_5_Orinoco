@@ -75,6 +75,13 @@ function cameras(product) { //Création de la carte produit
     
     /*---------------------------SELECTION DE LA QUANTITE-------------------------*/
 
+}
+
+/*---------------------------ENVOYER INFOS AU PANIER-------------------------*/
+
+
+function stockPanier(productcamera) {
+
     const structureQuantite = `
     <option value="1">1</option>
     <option value="2">2</option>
@@ -86,16 +93,19 @@ function cameras(product) { //Création de la carte produit
     const positionElementQuantite = document.getElementById("optionsquantity");
     positionElementQuantite.innerHTML = structureQuantite;
 
-}
+    //FAIRE UN TABLEAU ?
 
-/*---------------------------ENVOYER INFOS AU PANIER-------------------------*/
-
-
-function stockPanier(productcamera) {
-    
     let btn = document.getElementById("btn_panier");
     
     btn.addEventListener('click', function () {
+
+        let choixQuantite = positionElementQuantite.value;
+        console.log("choixQuantite")
+        console.log(choixQuantite);
+
+        let choixQuantiteInt = parseInt (choixQuantite, 10);
+        
+        let calculprix = productcamera.price * choixQuantiteInt;
         
         class produit {
             constructor(image, name, price, id, quantity) {
@@ -106,9 +116,9 @@ function stockPanier(productcamera) {
                 this.quantity = quantity
             }
         }
-             
-        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, productcamera.price, productcamera._id, 1 /*Lire le champs quantité*/);
-        
+       
+        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, calculprix, productcamera._id, choixQuantiteInt);
+      
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
         //JSON.parse c'est pour convertir les données JSON en format JS
@@ -125,7 +135,8 @@ function stockPanier(productcamera) {
             console.log(idInCart)
             
             if (idInCart >= 0) { 
-                localStorageProducts[idInCart].quantity +=1 //a = a + 1
+                localStorageProducts[idInCart].quantity += (choixQuantiteInt) //a = a + 1
+                localStorageProducts[idInCart].price += (calculprix) 
                 console.log("trouvé")  
             }
             

@@ -18,6 +18,13 @@
   background-color: #8f5aff ;
 }
 
+@media all and (min-width: 767px) {
+.head {
+  display: flex;
+
+}
+}
+
 /*---------------------------------------------INDEX-HTML--------------------------------------------------------*/
 
 .bg-violet {

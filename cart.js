@@ -133,6 +133,8 @@ for (let j = 0; j < btn_supprimer.length; j++) {
     let element = document.getElementById('products__list');
     element.insertAdjacentHTML("beforeend", affichagePrixHtml);
     
+    localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+    
     //----------------------------------------------Formulaire de contact--------------------------------------------
     
     function afficherFormulaireHtml () {
@@ -306,40 +308,47 @@ for (let j = 0; j < btn_supprimer.length; j++) {
         
         //-------------------------------------------FIN - GESTION VALIDATION DU FORMULAIRE-----------------------------------------//
         
-        if(lastControl() && firstControl() && emailControl() && adressControl() && cpControl() && cityControl()){
-            //Mettre l'objet "formulaireValues" dans le local storage
-            localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues));
-
-            let aEnvoyer = {
-                localStorageProducts,
-                formulaireValues
-            };
-
-            let promise = JSON.stringify(aEnvoyer);
-
-            fetch("http://localhost:3000/api/cameras/order", {
+        if (localStorageProducts === null) {
+            
+            alert("Votre panier est vide");
+            
+        } else {
+            
+            if(lastControl() && firstControl() && emailControl() && adressControl() && cpControl() && cityControl()){
+                //Mettre l'objet "formulaireValues" dans le local storage
+                localStorage.setItem("formulaireValues", JSON.stringify(formulaireValues));
+                              
+                let aEnvoyer = {
+                    formulaireValues,
+                    prixTotal
+                };
+                
+                let promise = JSON.stringify(aEnvoyer);
+                
+                fetch ("http://localhost:3000/api/cameras/order", {
                 headers: {
-                  "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 method: "POST",
                 body: promise,
-              })
-                .then((data) => {
-                  return data.json();
-                })
-                .then((json) => {
-                  localStorage.setItem("order", json.orderId);
-                  //location.href = "confirmation.html";
-                });
-              localStorage.removeItem("camera");
-                      
+            })
+            .then((data) => {
+                return data.json();
+            })
+            .then((json) => {
+                localStorage.setItem("order", json.orderId);
+                location.href = "confirmation.html";
+            });
+            localStorage.removeItem("camera");
+            
         }else{
-
+            
             alert("Veuillez bien remplir le formulaire"); 
             
         };
-        
-        //Mettre les values du formulaire et les produits sélectionnés dans un objet à envoyer au serveur
+    }
+    
+    //Mettre les values du formulaire et les produits sélectionnés dans un objet à envoyer au serveur
 });
 
 //----------------------------------------------Gestion validation du formulaire--------------------------------------------
