@@ -2,12 +2,7 @@
 
 .background-header { 
   height: 100px;
-  background-color: #f3e9f1;
-}
-
-header {
-  display: flex;
-  justify-content: end;
+  background-color: #f3e9f1;  
 }
 
 .menu-color {
@@ -21,26 +16,6 @@ header {
 .footer {
   height: 90px;
   background-color: #8f5aff ;
-}
-
-@media all and (max-width: 767px)
-{
-  .background-header {
-    margin-bottom: 60px;
-  }
-
-  header {
-    display: grid;
-    justify-content: center;
-  }
-
-  .logo {
-    justify-content: center;
-  }
-
-  .menu {
-    justify-content: center;
-  }
 }
 
 /*---------------------------------------------INDEX-HTML--------------------------------------------------------*/
@@ -104,13 +79,6 @@ header {
   margin: 2rem 0 1rem 0;
 }
 
-.total-price-block {
-  background-color: #e9e9ea;
-  border-radius: 10px;
-  padding: 1rem 1rem;
-  margin-top: 1rem;
-}
-
 .formulaire-title {
   font-size: 28px;
 }
@@ -131,56 +99,12 @@ header {
   color: white;
 }
 
-.cart-product {
-    flex-wrap: nowrap;
-}
 
-@media all and (min-width: 1200px) and (max-width: 1399px)
-{
-  .card-img {
-    width: 115%;
-    height: 100%;
-    }
 
-  .card-body {
-    margin-left: 1.5rem;
-  }
-}
 
-@media all and (min-width: 992px) and (max-width: 1199px)
-{
-  .card-img {
-    width: 135%;
-    height: 100%;
-    }
 
-  .card-body {
-    margin-left: 4rem;
-  }
-}
 
-@media all and (min-width: 768px) and (max-width: 991px)
-{
-  .card-img {
-    width: 130%;
-    height: 100%;
-    }
 
-  .card-body {
-    margin-left: 3rem;
-  }
-}
 
-@media all and (max-width: 767px)
-{
-  .card-img {
-  border-radius: 10px;
-  }
-  
-  .cart-product {
-    flex-wrap: wrap;
-}
-
-}
-
+/*Cart*/
 
