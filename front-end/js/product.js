@@ -2,7 +2,7 @@ const url_adress = window.location.href; //on va chercher adresse href="product.
 const url = new URL(url_adress);
 let product_id = url.searchParams.get("id");
 
-//Appel API avec adresse du produit grace à l'ID
+//Appel API avec adresse du produit grâce à l'ID
 
 const getCamera = async function () {
     try {
@@ -45,7 +45,7 @@ function cameras(product) { //Création de la carte produit
     <span id="quantity-label" class="col pt-2">Quantité :</span>
     <select name="quantity" id="optionsquantity" class="form-select col"></select>
     </label>
-
+    
     </form>                          
     </div>
     <div class="d-grid justify-content-md-end">
@@ -73,15 +73,12 @@ function cameras(product) { //Création de la carte produit
     
     optionsSelector.innerHTML = options;
     
-    /*---------------------------SELECTION DE LA QUANTITE-------------------------*/
-
 }
 
-/*---------------------------ENVOYER INFOS AU PANIER-------------------------*/
-
+/*---------------------------SELECTION DE LA QUANTITE-------------------------*/
 
 function stockPanier(productcamera) {
-
+    
     const structureQuantite = `
     <option value="1">1</option>
     <option value="2">2</option>
@@ -89,18 +86,18 @@ function stockPanier(productcamera) {
     <option value="4">4</option>
     <option value="5">5</option>
     `;
-
+    
     const positionElementQuantite = document.getElementById("optionsquantity");
     positionElementQuantite.innerHTML = structureQuantite;
-
+    
     let btn = document.getElementById("btn_panier");
     
     btn.addEventListener('click', function () {
-
+        
         let choixQuantite = positionElementQuantite.value;
         console.log("choixQuantite")
         console.log(choixQuantite);
-
+        
         let choixQuantiteInt = parseInt (choixQuantite, 10);
         
         let calculprix = productcamera.price * choixQuantiteInt;
@@ -114,9 +111,9 @@ function stockPanier(productcamera) {
                 this.quantity = quantity
             }
         }
-       
+        
         let cameraCard = new produit(productcamera.imageUrl, productcamera.name, calculprix, productcamera._id, choixQuantiteInt);
-      
+        
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
         //JSON.parse c'est pour convertir les données JSON en format JS

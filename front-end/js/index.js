@@ -14,31 +14,31 @@ const getProducts = async function () {
         console.log(e)
     }
 }
- 
+
 getProducts();
 
 //Affichage du tableau 
 
 function items(products) {
-
-    for (let i = 0; i < products.length; i++) { //Boucle for, déclarer var i = 0 (=compteur) - condition i < au nbr d'ele dans tableau - puis incrémenté i pour parcourir ele tableau
+    
+    for (let i = 0; i < products.length; i++) { //Boucle for, déclarer let i = 0 (=compteur) -> condition i < au nbr d'ele dans tableau -> puis incrémenté i pour parcourir ele tableau
         //dot notation
-
+        
         let content = `<div class="col-md-6 col-xl-4 mt-2">
-                        <div class="card picture mb-3">
-                            <a id="${products[i]._id}" href="product.html?id=${products[i]._id}"> 
-                                <img src="${products[i].imageUrl}">
-                                    <div class="card-text">    
-                                        <h2>${products[i].name}</h2>
-                                        <p>${products[i].price /100} €</p>
-                                    </div>              
-                            </a>
-                        </div>
-                    </div>`;
-
-    let elt = document.getElementById('products__list'); //va chercher dans DOM élément avec id="products__list"
-
-    elt.innerHTML += content;
-
+        <div class="card picture mb-3">
+        <a id="${products[i]._id}" href="product.html?id=${products[i]._id}"> 
+        <img src="${products[i].imageUrl}">
+        <div class="card-text">    
+        <h2>${products[i].name}</h2>
+        <p>${products[i].price /100} €</p>
+        </div>              
+        </a>
+        </div>
+        </div>`;
+        
+        let elt = document.getElementById('products__list'); //va chercher dans DOM élément avec id="products__list"
+        
+        elt.innerHTML += content;
+        
     }
 }
