@@ -345,7 +345,7 @@ function afficherFormulaireHtml () {
       })
       .then((json) => {
         localStorage.setItem("order", json.orderId);
-        //location.href = "confirmation.html";
+        location.href = "confirmation.html";
       });
       localStorage.removeItem("camera");
     } else {
