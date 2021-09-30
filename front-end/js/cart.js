@@ -1,5 +1,7 @@
+//-----------------------------AFFICHAGE DES PRODUIT DU PANIER----------------------------
+
 let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
-console.log(localStorageProducts);
+//console.log(localStorageProducts);
 
 //Si le panier est vide
 if(localStorageProducts === null || localStorageProducts == 0){
@@ -48,18 +50,16 @@ if(localStorageProducts === null || localStorageProducts == 0){
   }
 }
 
-//-----------------------------Fin de l'affichage des produits du panier------------------
-
-//------------------------------Gestion du bouton supprimer l'article---------------------
+//------------------------------GESTION DU BOUTON SUPPRIMER L'ARTICLE---------------------
 
 let btn_supprimer = document.querySelectorAll('#btn-supprimer');
-console.log(btn_supprimer);
+//console.log(btn_supprimer);
 
 for (let j = 0; j < btn_supprimer.length; j++) { //créer un tableau des boutons supprimer
   btn_supprimer[j].addEventListener('click', function() {
     
     let id_selectionner_suppression = localStorageProducts[j].product_id; //selectionné l'id dans tableau du localStorage
-    console.log(id_selectionner_suppression);
+    //console.log(id_selectionner_suppression);
     
     localStorageProducts = localStorageProducts.filter( //splice : La méthode splice() modifie le contenu d'un tableau en retirant des éléments et/ou en ajoutant de nouveaux éléments à même le tableau.On peut ainsi vider ou remplacer une partie d'un tableau.
     (elt) => elt.product_id !== id_selectionner_suppression //product_id, 1
@@ -72,7 +72,7 @@ for (let j = 0; j < btn_supprimer.length; j++) { //créer un tableau des boutons
   });
 }
 
-//----------------------------------Bouton vider le panier-----------------------------------------------
+//----------------------------------BOUTON VIDER LE PANIER--------------------------------
 
 if(localStorageProducts === null || localStorageProducts == 0){
 }
@@ -100,9 +100,7 @@ else {
   });
 }
 
-//----------------------------------FIN Bouton vider le panier-----------------------------------------------
-
-//----------------------------------Le montant total du panier-----------------------------------------------
+//----------------------------------MONTANT TOTAL DU PANIER-------------------------------
 
 //Déclaration de la variable pour y mettre les prix des items présents dans le panier
 let prixTotalCalcul = [];
@@ -114,14 +112,13 @@ for (let k = 0; k < localStorageProducts.length; k++) {
   //Mettre les prix du panier dans la variable "prixTotalCalcul"
   prixTotalCalcul.push(prixProduitDansLePanier)
   
-  console.log("prixTotalCalcul");
-  console.log(prixTotalCalcul)
+  //console.log(prixTotalCalcul)
 } 
 
 //Additionner les prix qu'il y a dans le tableau de la variable "prixTotalCalcul" avec la méthode .reduce
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const prixTotal = prixTotalCalcul.reduce(reducer,0);
-console.log(prixTotal);
+//console.log(prixTotal);
 
 //Le code HTML du prix total à afficher
 
@@ -139,7 +136,7 @@ else {
 
 localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
 
-//----------------------------------FORMULAIRE-----------------------------------------------
+//----------------------------------CREATION DU FORMULAIRE DE COMMANDE--------------------------------
 
 function afficherFormulaireHtml () {
   
@@ -201,7 +198,7 @@ function afficherFormulaireHtml () {
   
   afficherFormulaireHtml();
   
-  //----------------------------------------------------------------------------------------//
+  //----------------------------------BOUTON VALIDER LA COMMANDE--------------------------------
   
   let btn_formulaire = document.getElementById('submit');
   
@@ -219,7 +216,7 @@ function afficherFormulaireHtml () {
       cp: document.getElementById("cp").value,
     };
     
-    //----------------------------------------------GESTION VALIDATION DU FORMULAIRE--------------------------------------------//
+    //-----------------------------GESTION VALIDATION DU FORMULAIRE-----------------------------
     
     const regExLastName = (value) => {
       return /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/.test(value);
@@ -314,7 +311,7 @@ function afficherFormulaireHtml () {
       }
     };
     
-    // envoyer les donnees apres le controle
+    //-----------------------------ENVOI DES DONNEES APRES CONTROL-----------------------------
     
     if (
       lastNameControl() &&
@@ -329,7 +326,7 @@ function afficherFormulaireHtml () {
           products: [],
           contact: formulaireValues,
         };
-        console.log(envoyer);
+        //console.log(envoyer);
         
         let objetRequest = JSON.stringify(envoyer);
         

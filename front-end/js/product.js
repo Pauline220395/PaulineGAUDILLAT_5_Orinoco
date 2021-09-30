@@ -2,7 +2,7 @@ const url_adress = window.location.href; //on va chercher adresse href="product.
 const url = new URL(url_adress);
 let product_id = url.searchParams.get("id");
 
-//Appel API avec adresse du produit grâce à l'ID
+//-----------------------------APPEL DE L'API AVEC ADRESSE DU PRODUIT GRACE A L'ID--------------------------
 
 const getCamera = async function () {
     try {
@@ -21,7 +21,9 @@ const getCamera = async function () {
 
 getCamera();
 
-function cameras(product) { //Création de la carte produit
+//-----------------------------CREATION CARTE PRODUIT-----------------------------
+
+function cameras(product) {
     
     let cameraCard = `<div class="row mb-4">
     
@@ -60,7 +62,7 @@ function cameras(product) { //Création de la carte produit
     
     carteProduit.innerHTML = cameraCard;
     
-    /*---------------------------SELECTION DE LA LENTILLES-------------------------*/
+    //---------------------------SELECTION DE LA LENTILLES-------------------------
     
     let options = ''; //variable comprenant la recherche dans tableau lenses
     
@@ -69,13 +71,13 @@ function cameras(product) { //Création de la carte produit
     }
     
     let optionsSelector = document.getElementById("optionslenses"); //On dit à notre ligne de se placer dans l'élément avec id optionslenses
-    console.log(optionsSelector)
+    //console.log(optionsSelector)
     
     optionsSelector.innerHTML = options;
     
 }
 
-/*---------------------------SELECTION DE LA QUANTITE-------------------------*/
+//---------------------------SELECTION DE LA QUANTITE-------------------------
 
 function stockPanier(productcamera) {
     
@@ -95,8 +97,7 @@ function stockPanier(productcamera) {
     btn.addEventListener('click', function () {
         
         let choixQuantite = positionElementQuantite.value;
-        console.log("choixQuantite")
-        console.log(choixQuantite);
+        //console.log(choixQuantite);
         
         let choixQuantiteInt = parseInt (choixQuantite, 10);
         
@@ -119,26 +120,23 @@ function stockPanier(productcamera) {
         //JSON.parse c'est pour convertir les données JSON en format JS
         
         //s'il y a deja des produits enregistré dans le local storage
-        console.log("localStorage")
-        console.log(localStorageProducts)
+        //console.log(localStorageProducts)
         
         if(localStorageProducts) { //ajouter un produit supplémentaire dans le local storage 
             
-            let idInCart = localStorageProducts.findIndex((item) => item.product_id === product_id); // => fonction anonyme 
-            
-            console.log("localStorage pas vide")
-            console.log(idInCart)
+            let idInCart = localStorageProducts.findIndex((item) => item.product_id === product_id); // => fonction anonyme             
+            //console.log(idInCart)
             
             if (idInCart >= 0) { 
                 localStorageProducts[idInCart].quantity += (choixQuantiteInt) //a = a + 1
                 localStorageProducts[idInCart].price += (calculPrix) 
-                console.log("trouvé")  
+                //console.log("trouvé")  
             }
             
             else { //SINON ajouter ce nouveau produit
                 localStorageProducts.push(cameraCard); 
                 localStorage.setItem("camera", JSON.stringify(localStorageProducts));
-                console.log("PAS trouvé")  
+                //console.log("PAS trouvé")  
             }
         }
         
@@ -147,7 +145,7 @@ function stockPanier(productcamera) {
             localStorageProducts = []; //créer un tableau qui va contenir les produits
             localStorageProducts.push(cameraCard); //Mettre infos produit + carte dans le tableau
             
-            console.log("localStorage vide")
+            //console.log("localStorage vide")
         }
         
         localStorage.setItem("camera", JSON.stringify(localStorageProducts));

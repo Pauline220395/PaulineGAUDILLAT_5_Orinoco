@@ -1,4 +1,4 @@
-//Appel de l'API
+//-----------------------------APPEL DE L'API-----------------------------
 
 const getProducts = async function () {
     try {
@@ -17,7 +17,7 @@ const getProducts = async function () {
 
 getProducts();
 
-//Affichage du tableau 
+//-----------------------------AFFICHAGE DES PRODUITS---------------------------
 
 function items(products) {
     
