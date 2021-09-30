@@ -78,7 +78,7 @@ if(localStorageProducts === null || localStorageProducts == 0){
 }
 else {
   
-  const btnViderLePanierHtml = `
+  let btnViderLePanierHtml = `
   <button class="btn_vider_le_panier btn btn-danger container mb-3""> Vider le panier</button>
   `;
   
@@ -88,7 +88,7 @@ else {
   
   //Selection du bouton "btn_vider_le_panier"
   
-  const btnViderLePanier = document.querySelector(".btn_vider_le_panier");
+  let btnViderLePanier = document.querySelector(".btn_vider_le_panier");
   
   //Suppression de la key camera du localStorage
   btnViderLePanier.addEventListener('click', function() {
@@ -128,7 +128,7 @@ console.log(prixTotal);
 if(localStorageProducts === null || localStorageProducts == 0){
 }
 else {
-  const affichagePrixHtml = `
+  let affichagePrixHtml = `
   <div class="affichage-prix-html d-grid justify-content-md-end total-price-block"><strong>Le prix total est de : ${prixTotal /100} €</strong> </div>`
   
   //injection html dans la page panier
@@ -203,7 +203,7 @@ function afficherFormulaireHtml () {
   
   //----------------------------------------------------------------------------------------//
   
-  const btn_formulaire = document.getElementById('submit');
+  let btn_formulaire = document.getElementById('submit');
   
   btn_formulaire.addEventListener("click", (e) => {
     e.preventDefault();
@@ -225,7 +225,7 @@ function afficherFormulaireHtml () {
       return /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/.test(value);
     }
     
-    function lastnameControl() {
+    function lastNameControl() {
       
       const lastName = formulaireValues.lastName;
       if(regExLastName(lastName)){
@@ -238,7 +238,7 @@ function afficherFormulaireHtml () {
       }
     };
     
-    function firstnameControl() {
+    function firstNameControl() {
       
       const firstName = formulaireValues.firstName;
       if(regExLastName(firstName)){
@@ -317,8 +317,8 @@ function afficherFormulaireHtml () {
     // envoyer les donnees apres le controle
     
     if (
-      lastnameControl() &&
-      firstnameControl() &&
+      lastNameControl() &&
+      firstNameControl() &&
       cityControl() &&
       emailControl() &&
       addressControl() &&
@@ -329,6 +329,7 @@ function afficherFormulaireHtml () {
           products: [],
           contact: formulaireValues,
         };
+        console.log(envoyer);
         
         let objetRequest = JSON.stringify(envoyer);
         
@@ -344,7 +345,7 @@ function afficherFormulaireHtml () {
       })
       .then((json) => {
         localStorage.setItem("order", json.orderId);
-        location.href = "confirmation.html";
+        //location.href = "confirmation.html";
       });
       localStorage.removeItem("camera");
     } else {

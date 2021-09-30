@@ -79,7 +79,7 @@ function cameras(product) { //Création de la carte produit
 
 function stockPanier(productcamera) {
     
-    const structureQuantite = `
+    let structureQuantite = `
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -87,7 +87,7 @@ function stockPanier(productcamera) {
     <option value="5">5</option>
     `;
     
-    const positionElementQuantite = document.getElementById("optionsquantity");
+    let positionElementQuantite = document.getElementById("optionsquantity");
     positionElementQuantite.innerHTML = structureQuantite;
     
     let btn = document.getElementById("btn_panier");
@@ -100,7 +100,7 @@ function stockPanier(productcamera) {
         
         let choixQuantiteInt = parseInt (choixQuantite, 10);
         
-        let calculprix = productcamera.price * choixQuantiteInt;
+        let calculPrix = productcamera.price * choixQuantiteInt;
         
         class produit {
             constructor(image, name, price, id, quantity) {
@@ -112,7 +112,7 @@ function stockPanier(productcamera) {
             }
         }
         
-        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, calculprix, productcamera._id, choixQuantiteInt);
+        let cameraCard = new produit(productcamera.imageUrl, productcamera.name, calculPrix, productcamera._id, choixQuantiteInt);
         
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
@@ -131,7 +131,7 @@ function stockPanier(productcamera) {
             
             if (idInCart >= 0) { 
                 localStorageProducts[idInCart].quantity += (choixQuantiteInt) //a = a + 1
-                localStorageProducts[idInCart].price += (calculprix) 
+                localStorageProducts[idInCart].price += (calculPrix) 
                 console.log("trouvé")  
             }
             
