@@ -99,7 +99,7 @@ function stockPanier(productcamera) {
         let choixQuantite = positionElementQuantite.value;
         //console.log(choixQuantite);
         
-        let choixQuantiteInt = parseInt (choixQuantite, 10);
+        let choixQuantiteInt = parseInt (choixQuantite, 10); // La fonction parseInt() analyse une chaîne de caractère fournie en argument et renvoie un entier exprimé dans une base donnée.
         
         let calculPrix = productcamera.price * choixQuantiteInt;
         
@@ -114,6 +114,7 @@ function stockPanier(productcamera) {
         }
         
         let cameraCard = new produit(productcamera.imageUrl, productcamera.name, calculPrix, productcamera._id, choixQuantiteInt);
+        console.log(cameraCard)
         
         //Déclaration de la variable localStorageProducts dans laquelle on met les keys et les values qui sont dans le local storage
         let localStorageProducts = JSON.parse(localStorage.getItem ("camera"));
